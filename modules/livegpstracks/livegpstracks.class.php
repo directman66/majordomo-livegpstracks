@@ -338,43 +338,25 @@ function usual(&$out) {
 
 	$table='lgps_in';	
 	$properties=SQLSelect("SELECT * FROM $table;");
-	$total=count($properties);
-	if ($total) {
-		$sens = array();
-		for($i=0;$i<$total;$i++)
-			$sens[] = $properties[$i]['DID'];
 
-		$request =
-			array( 
-				'cmd' => "sensorsValues", 
-				'sensors' => $sens,
-				'uuid' => $this->config['UUID'],
-				'api_key' => $this->API_KEY
-			);
-			
-		if($ch = curl_init('http://livegpstracks.com/viewer_coos_s.php?code='.$did)) {
-			curl_setopt($ch, CURLOPT_POST, true);
-			curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-			curl_setopt($ch, CURLOPT_USERAGENT, 'MajorDomo module');
-//			curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
-			$reply = curl_exec($ch); 
-			
-			if(!$reply or empty($reply)) 
-			{
-				echo date("Y-m-d H:i:s")."Request: Connect error : ".$reply."\n";
-				return false;
-			}
-			
-			$data = json_decode($reply, true);
-			if(!$data or !is_array($data))
-			{
-				echo date("Y-m-d H:i:s")."Request: Wrong data\n";
-				return false;
-			}
-			
-			echo date("Y-m-d H:i:s")." Request: ok\n";
+foreach ($properties as $did)
+{
+$num=$did[DID];
+$urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num];
+}	
 
+//$urls = [
+//    ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code=55514948447628658217585'],
+//    ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code=38614954354422955857342'],
+///];
+
+
+
+		
+	 foreach ($urls as $url1) {
+     
+     echo $url1['url'];
+$content=getURL($url1['url'], 0);  
 $data=json_decode($content,true);
 //$objn=$data[0]['id'];
 $objn=$data[0]['code'];
@@ -383,7 +365,7 @@ echo $objn.'----------------';
 addClassObject('livegpstracks',$objn);
 $src=$data[0];
      
-//получаю последнее значение времени импортирования в бд     
+//РїРѕР»СѓС‡Р°СЋ РїРѕСЃР»РµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ РІСЂРµРјРµРЅРё РёРјРїРѕСЂС‚РёСЂРѕРІР°РЅРёСЏ РІ Р±Рґ     
 $lud=gg($objn.'.d'); $lut=gg($objn.'.d');         
      
      
@@ -422,15 +404,12 @@ sg($objn.'.short_address', $spl[0]);
 
 }    
 else {sg($objn.'.gpsupdate', 'no need'); }     
-    }
-
-		
-				
+    }				
 
 						
-			curl_close($ch); 
+
 		}
-	}
+	
  
    
 function readHistory($id, $period, $offset)
@@ -513,7 +492,7 @@ function readHistory($id, $period, $offset)
 /*
 nm_outdata - 
 */
-addClass('livegpstracks'); // Создаем класс
+addClass('livegpstracks'); // РЎРѕР·РґР°РµРј РєР»Р°СЃСЃ
   $data = <<<EOD
  lgps_out: ID int(30) unsigned NOT NULL auto_increment
  lgps_out: TITLE varchar(100) NOT NULL DEFAULT ''
