@@ -10,8 +10,8 @@ include_once("./load_settings.php");
 include_once(DIR_MODULES . "control_modules/control_modules.class.php");
 $ctl = new control_modules();
 include_once(DIR_MODULES . 'livegpstracks/livegpstracks.class.php');
-$narodmon2_module = new narodmon2();
-$narodmon2_module->getConfig();
+$livegpstracks_module = new livegpstracks();
+$livegpstracks_module->getConfig();
 // In data
 $tmp1 = SQLSelectOne("SELECT ID FROM lgps_out LIMIT 1");
 // Out data
