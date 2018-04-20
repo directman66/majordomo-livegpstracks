@@ -344,7 +344,7 @@ foreach ($properties as $did)
 $num=$did[DID];
 $title=$did[TITLE];
 //$urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num];
-$urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num,'name'=>$title];
+$urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num,'name'=>$title,'numer'=>$num];
 }	
 
 
@@ -354,6 +354,7 @@ $urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num,'nam
      
 echo $url1['url'];
 $title=$url1['name'];
+$numer=$url1['numer'];
 $content=getURL($url1['url'], 0);  
 $data=json_decode($content,true);
 //$objn=$data[0]['id'];
@@ -381,7 +382,7 @@ foreach ($src as $key=> $value ) {
 $upd = false;
 }     
 
-$rec=SQLSelectOne("SELECT * FROM lgps_in WHERE DID='".$num."'");
+$rec=SQLSelectOne("SELECT * FROM lgps_in WHERE DID='".$numer."'");
 //$rec['VALUE'] = 'ok';
 $rec['VALUE'] = gg($objn.'.lat').','.gg($objn.'.lng') ;
 $rec['UPDATED'] = date('Y-m-d H:i:s');
