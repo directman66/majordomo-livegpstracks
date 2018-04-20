@@ -45,6 +45,9 @@ function saveParams($data=0) {
  }
  return parent::saveParams($p);
 }
+
+
+
 /**
 * getParams
 *
@@ -364,7 +367,7 @@ echo $objn.'----------------';
 addClassObject('livegpstracks',$objn);
 $src=$data[0];
      
-//получаю последнее значение времени импортирования в бд     
+//РїРѕР»СѓС‡Р°СЋ РїРѕСЃР»РµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ РІСЂРµРјРµРЅРё РёРјРїРѕСЂС‚РёСЂРѕРІР°РЅРёСЏ РІ Р±Рґ     
 $lud=gg($objn.'.d'); $lut=gg($objn.'.d');         
      
      
@@ -384,7 +387,10 @@ $upd = false;
 
 $rec=SQLSelectOne("SELECT * FROM lgps_in WHERE DID='".$numer."'");
 //$rec['VALUE'] = 'ok';
+//$smadr=getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));
+//$smadr=ga('56.836498','60.691435' );
 $rec['VALUE'] = gg($objn.'.lat').','.gg($objn.'.lng') ;
+$rec['STREET'] =$smadr;
 $rec['UPDATED'] = date('Y-m-d H:i:s');
 
 SQLUpdate('lgps_in', $rec);
@@ -421,6 +427,8 @@ else {sg($objn.'.gpsupdate', 'no need'); }
 						
 
 		}
+function ga($x,$y)
+{return "ok";}
 	
  
    
@@ -504,7 +512,7 @@ function readHistory($id, $period, $offset)
 /*
 nm_outdata - 
 */
-addClass('livegpstracks'); // Создаем класс
+addClass('livegpstracks'); // РЎРѕР·РґР°РµРј РєР»Р°СЃСЃ
 addClassMethod('livegpstracks','update','SQLUpdate(\'objects\', array("ID"=>$this->id, "DESCRIPTION"=>$this->getProperty("title").\' \'.gg(\'sysdate\').\' \'.gg(\'timenow\'))); ');
 //addClassProperty('livegpstracks','t');
 addClassProperty('livegpstracks','d',10);
@@ -539,6 +547,34 @@ EOD;
   parent::dbInstall($data);
  }
 // --------------------------------------------------------------------
+
+//////
+function getaddrfromcoord($x,$y)
+{
+$url='http://maps.googleapis.com/maps/api/geocode/xml?latlng='.$x.',' .$y.'&sensor=false&language=ru'; 
+//  $fields = array(
+//   	'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+//	'Accept-Charset: windows-1251,utf-8;q=0.7,*;q=0.3',
+//	'Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4',	'Connection: keep-alive',	'User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36'     );
+//foreach($fields as $key=>$value)
+//{ $fields_string .= $key.'='.urlencode($value).'&'; }
+//rtrim($fields_string, '&');
+//   $ch = curl_init();   
+//   curl_setopt($ch, CURLOPT_URL, $url);
+//   curl_setopt($ch, CURLOPT_POST, count($fields));   
+//   curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+//   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+//   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+//   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+//   curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); 
+////   $result = curl_exec($ch);
+// curl_close($ch);
+////$xml = simplexml_load_string($result);
+//$otvet=$xml->result->formatted_address; 
+//$spl=explode(',',$otvet) ;
+//return $spl[0] ;
+return $url;
+} 
 }
 /*
 *
