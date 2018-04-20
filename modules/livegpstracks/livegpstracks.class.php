@@ -530,6 +530,7 @@ $prop_id=addClassProperty('livegpstracks', 't', 10);
  lgps_in: DID varchar(30) NOT NULL
  lgps_in: TITLE varchar(100) NOT NULL DEFAULT ''
  lgps_in: VALUE varchar(100)
+ lgps_in: STREET varchar(100)
  lgps_in: UPDATED datetime
  lgps_in: LINKED_OBJECT varchar(100) NOT NULL DEFAULT ''
  lgps_in: LINKED_PROPERTY varchar(100) NOT NULL DEFAULT ''
