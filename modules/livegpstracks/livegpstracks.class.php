@@ -497,6 +497,8 @@ function readHistory($id, $period, $offset)
 nm_outdata - 
 */
 addClass('livegpstracks'); // Создаем класс
+addClassMethod('livegpstracks','update ','SQLUpdate(\'objects\', array("ID"=>$this->id, "DESCRIPTION"=>$this->getProperty("title").\' \'.gg(\'sysdate\').\' \'.gg(\'timenow\'))); ');
+  
   $data = <<<EOD
  lgps_out: ID int(30) unsigned NOT NULL auto_increment
  lgps_out: TITLE varchar(100) NOT NULL DEFAULT ''
