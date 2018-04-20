@@ -499,9 +499,9 @@ nm_outdata -
 addClass('livegpstracks'); // Создаем класс
 addClassMethod('livegpstracks','update','SQLUpdate(\'objects\', array("ID"=>$this->id, "DESCRIPTION"=>$this->getProperty("title").\' \'.gg(\'sysdate\').\' \'.gg(\'timenow\'))); ');
 //addClassProperty('livegpstracks','t');
-addClassProperty('livegpstracks','d');
+addClassProperty('livegpstracks','d',10);
 
-$prop_id=addClassProperty('livegpstracks', 't', 0);
+$prop_id=addClassProperty('livegpstracks', 't', 10);
 				  if ($prop_id) {
 					  $property=SQLSelectOne("SELECT * FROM properties WHERE ID=".$prop_id);
 					  $property['ONCHANGE']='update'; //   <-----------
