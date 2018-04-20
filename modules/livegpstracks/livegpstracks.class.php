@@ -347,17 +347,12 @@ $title=$did[TITLE];
 $urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num,'name'=>$title];
 }	
 
-//$urls = [
-//    ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code=55514948447628658217585'],
-//    ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code=38614954354422955857342'],
-///];
-
 
 
 		
 	 foreach ($urls as $url1) {
      
-     echo $url1['url'];
+echo $url1['url'];
 $title=$url1['name'];
 $content=getURL($url1['url'], 0);  
 $data=json_decode($content,true);
@@ -374,12 +369,24 @@ $lud=gg($objn.'.d'); $lut=gg($objn.'.d');
      
      sg( $objn.'.json',$content);
    
-   sg( $objn.'.link','https://livegpstracks.com/dv_'.$objn.'.html');     
+   sg( $objn.'.link','https://livegpstracks.com/dv_'.$objn.'.html'); 
+    
   sg( $objn.'.title',$title);     
+
+
+
 foreach ($src as $key=> $value ) {
    sg( $objn.'.'.$key,$value);
  echo $key;
+$upd = false;
 }     
+
+$rec=SQLSelectOne("SELECT * FROM lgps_in WHERE DID='".$num."'");
+//$rec['VALUE'] = 'ok';
+$rec['VALUE'] = gg($objn.'.lat').','.gg($objn.'.lng') ;
+$rec['UPDATED'] = date('Y-m-d H:i:s');
+
+SQLUpdate('lgps_in', $rec);
 
 
 if ($lud<> gg($objn.'.d')   and  ($lut<> gg($objn.'.t'))) {
