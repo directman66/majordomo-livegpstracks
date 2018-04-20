@@ -497,9 +497,17 @@ function readHistory($id, $period, $offset)
 nm_outdata - 
 */
 addClass('livegpstracks'); // Создаем класс
-addClassMethod('livegpstracks','update ','SQLUpdate(\'objects\', array("ID"=>$this->id, "DESCRIPTION"=>$this->getProperty("title").\' \'.gg(\'sysdate\').\' \'.gg(\'timenow\'))); ');
-addClassProperty('livegpstracks','t');
+addClassMethod('livegpstracks','update','SQLUpdate(\'objects\', array("ID"=>$this->id, "DESCRIPTION"=>$this->getProperty("title").\' \'.gg(\'sysdate\').\' \'.gg(\'timenow\'))); ');
+//addClassProperty('livegpstracks','t');
 addClassProperty('livegpstracks','d');
+
+$prop_id=addClassProperty('livegpstracks', 't', 0);
+				  if ($prop_id) {
+					  $property=SQLSelectOne("SELECT * FROM properties WHERE ID=".$prop_id);
+					  $property['ONCHANGE']='update'; //   <-----------
+					  SQLUpdate('properties',$property);
+				  } 
+
   
   $data = <<<EOD
  lgps_out: ID int(30) unsigned NOT NULL auto_increment
