@@ -342,7 +342,9 @@ function usual(&$out) {
 foreach ($properties as $did)
 {
 $num=$did[DID];
-$urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num];
+$title=$did[TITLE];
+//$urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num];
+$urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num,'name'=>$title];
 }	
 
 //$urls = [
@@ -356,6 +358,7 @@ $urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num];
 	 foreach ($urls as $url1) {
      
      echo $url1['url'];
+$title=$url1['name'];
 $content=getURL($url1['url'], 0);  
 $data=json_decode($content,true);
 //$objn=$data[0]['id'];
@@ -372,6 +375,7 @@ $lud=gg($objn.'.d'); $lut=gg($objn.'.d');
      sg( $objn.'.json',$content);
    
    sg( $objn.'.link','https://livegpstracks.com/dv_'.$objn.'.html');     
+  sg( $objn.'.title',$title);     
 foreach ($src as $key=> $value ) {
    sg( $objn.'.'.$key,$value);
  echo $key;
