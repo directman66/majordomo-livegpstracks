@@ -367,7 +367,7 @@ echo $objn.'----------------';
 addClassObject('livegpstracks',$objn);
 $src=$data[0];
      
-//РїРѕР»СѓС‡Р°СЋ РїРѕСЃР»РµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ РІСЂРµРјРµРЅРё РёРјРїРѕСЂС‚РёСЂРѕРІР°РЅРёСЏ РІ Р±Рґ     
+//Р С—Р С•Р В»РЎС“РЎвЂЎР В°РЎР‹ Р С—Р С•РЎРѓР В»Р ВµР Т‘Р Р…Р ВµР Вµ Р В·Р Р…Р В°РЎвЂЎР ВµР Р…Р С‘Р Вµ Р Р†РЎР‚Р ВµР СР ВµР Р…Р С‘ Р С‘Р СР С—Р С•РЎР‚РЎвЂљР С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘РЎРЏ Р Р† Р В±Р Т‘     
 $lud=gg($objn.'.d'); $lut=gg($objn.'.d');         
      
      
@@ -387,9 +387,11 @@ $upd = false;
 
 $rec=SQLSelectOne("SELECT * FROM lgps_in WHERE DID='".$numer."'");
 //$rec['VALUE'] = 'ok';
-//$smadr=getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));
-//$smadr=ga('56.836498','60.691435' );
+$smadr=$this->getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));
+//$smadr='улица';
+//$smadr=$this->ga('56.836498','60.691435' );
 $rec['VALUE'] = gg($objn.'.lat').','.gg($objn.'.lng') ;
+//$rec['VALUE'] = $smadr ;
 $rec['STREET'] =$smadr;
 $rec['UPDATED'] = date('Y-m-d H:i:s');
 
@@ -512,7 +514,7 @@ function readHistory($id, $period, $offset)
 /*
 nm_outdata - 
 */
-addClass('livegpstracks'); // РЎРѕР·РґР°РµРј РєР»Р°СЃСЃ
+addClass('livegpstracks'); // Р РЋР С•Р В·Р Т‘Р В°Р ВµР С Р С”Р В»Р В°РЎРѓРЎРѓ
 addClassMethod('livegpstracks','update','SQLUpdate(\'objects\', array("ID"=>$this->id, "DESCRIPTION"=>$this->getProperty("title").\' \'.gg(\'sysdate\').\' \'.gg(\'timenow\'))); ');
 //addClassProperty('livegpstracks','t');
 addClassProperty('livegpstracks','d',10);
@@ -552,28 +554,28 @@ EOD;
 function getaddrfromcoord($x,$y)
 {
 $url='http://maps.googleapis.com/maps/api/geocode/xml?latlng='.$x.',' .$y.'&sensor=false&language=ru'; 
-//  $fields = array(
-//   	'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-//	'Accept-Charset: windows-1251,utf-8;q=0.7,*;q=0.3',
-//	'Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4',	'Connection: keep-alive',	'User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36'     );
-//foreach($fields as $key=>$value)
-//{ $fields_string .= $key.'='.urlencode($value).'&'; }
-//rtrim($fields_string, '&');
-//   $ch = curl_init();   
-//   curl_setopt($ch, CURLOPT_URL, $url);
-//   curl_setopt($ch, CURLOPT_POST, count($fields));   
-//   curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-//   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-//   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
-//   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-//   curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); 
-////   $result = curl_exec($ch);
-// curl_close($ch);
-////$xml = simplexml_load_string($result);
-//$otvet=$xml->result->formatted_address; 
-//$spl=explode(',',$otvet) ;
-//return $spl[0] ;
-return $url;
+  $fields = array(
+   	'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+	'Accept-Charset: windows-1251,utf-8;q=0.7,*;q=0.3',
+	'Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4',	'Connection: keep-alive',	'User-Agent: Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1547.76 Safari/537.36'     );
+foreach($fields as $key=>$value)
+{ $fields_string .= $key.'='.urlencode($value).'&'; }
+rtrim($fields_string, '&');
+   $ch = curl_init();   
+   curl_setopt($ch, CURLOPT_URL, $url);
+   curl_setopt($ch, CURLOPT_POST, count($fields));   
+   curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+   curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+   curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
+   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+   curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); 
+   $result = curl_exec($ch);
+ curl_close($ch);
+$xml = simplexml_load_string($result);
+$otvet=$xml->result->formatted_address; 
+$spl=explode(',',$otvet) ;
+return $spl[0] ;
+//return $url;
 } 
 }
 /*
