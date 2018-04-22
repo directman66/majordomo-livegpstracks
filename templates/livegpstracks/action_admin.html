@@ -7,6 +7,8 @@
 <!-- <div id="about" class="modal hide"> -->
 	<div class="modal-dialog">
 		<div class="modal-content">
+
+
 			<div class="modal-header">
 				<button class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
 				<h4 class="modal-title">https://livegpstracks.com/ [#VER#]</h4>
@@ -19,10 +21,11 @@
 
 			<div class="modal-body">
 
-				<a href="http://majordomo.smartliving.ru/forum/viewtopic.php?f=5&t=5406&p=78558#p78558" target="_blank">Forum</a>.<br>
+				<a href="http://majordomo.smartliving.ru/forum/" target="_blank">Forum</a>.<br>
 
 
 				</p>
+
 				<p class="float-left"></p>
 			</div>
 			
@@ -38,6 +41,12 @@
 https://livegpstracks.com/
  &nbsp;&nbsp;<a class="btn btn-default" href="#" onClick="$('#api_settings').toggle();return false;"><#LANG_SETUP#></a>
  &nbsp;&nbsp;<a class="btn btn-default" href="?data_source=<#DATA_SOURCE#>&view_mode=test&tab="><#LANG_TEST#></a>
+	[#if CYCLERUN==1#]
+		<span class="label label-success" title="Статус цикла">Цикл запущен</span>
+	[#else#]
+		<span class="label label-danger" title="Статус цикла">Цикл остановлен</span>
+	[#endif#]
+
  &nbsp; 
 </div>
 
@@ -105,6 +114,8 @@ https://livegpstracks.com/
 [#if VIEW_MODE="outdata_edit"#]	
 	[#inc outdata_edit.html#]
 [#else#]
+
+
 [#if VIEW_MODE="indata_edit"#]	
 	[#inc indata_edit.html#]
 [#else#]
