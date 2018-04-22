@@ -116,6 +116,14 @@ function run() {
 */
 function admin(&$out) {
  $this->getConfig();
+
+//        if ((time() - gg('cycle_livegpstracksRun')) < $this->config['TLG_TIMEOUT']*2 ) {
+        if ((time() - gg('cycle_livegpstracksRun')) < 360*2 ) {
+			$out['CYCLERUN'] = 1;
+		} else {
+			$out['CYCLERUN'] = 0;
+		}
+
  
  $out['UUID'] = $this->config['UUID'];
  $out['SRV_NAME']=$this->config['SRV_NAME'];
