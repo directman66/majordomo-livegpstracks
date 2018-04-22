@@ -364,7 +364,7 @@ $data=json_decode($content,true);
 $objn=$data[0]['code'];
      
 echo $objn.'----------------';
-if (strlen($objn)>3) {
+if (strlen($objn)>10) {
 addClassObject('livegpstracks',$objn);
 $src=$data[0];
      
