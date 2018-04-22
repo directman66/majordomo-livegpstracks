@@ -364,10 +364,11 @@ $data=json_decode($content,true);
 $objn=$data[0]['code'];
      
 echo $objn.'----------------';
+if (strlen($objn)>3) {
 addClassObject('livegpstracks',$objn);
 $src=$data[0];
      
-//Р С—Р С•Р В»РЎС“РЎвЂЎР В°РЎР‹ Р С—Р С•РЎРѓР В»Р ВµР Т‘Р Р…Р ВµР Вµ Р В·Р Р…Р В°РЎвЂЎР ВµР Р…Р С‘Р Вµ Р Р†РЎР‚Р ВµР СР ВµР Р…Р С‘ Р С‘Р СР С—Р С•РЎР‚РЎвЂљР С‘РЎР‚Р С•Р Р†Р В°Р Р…Р С‘РЎРЏ Р Р† Р В±Р Т‘     
+//Р В РЎвЂ”Р В РЎвЂўР В Р’В»Р РЋРЎвЂњР РЋРІР‚РЋР В Р’В°Р РЋР вЂ№ Р В РЎвЂ”Р В РЎвЂўР РЋР С“Р В Р’В»Р В Р’ВµР В РўвЂР В Р вЂ¦Р В Р’ВµР В Р’Вµ Р В Р’В·Р В Р вЂ¦Р В Р’В°Р РЋРІР‚РЋР В Р’ВµР В Р вЂ¦Р В РЎвЂР В Р’Вµ Р В Р вЂ Р РЋР вЂљР В Р’ВµР В РЎВР В Р’ВµР В Р вЂ¦Р В РЎвЂ Р В РЎвЂР В РЎВР В РЎвЂ”Р В РЎвЂўР РЋР вЂљР РЋРІР‚С™Р В РЎвЂР РЋР вЂљР В РЎвЂўР В Р вЂ Р В Р’В°Р В Р вЂ¦Р В РЎвЂР РЋР РЏ Р В Р вЂ  Р В Р’В±Р В РўвЂ     
 $lud=gg($objn.'.d'); $lut=gg($objn.'.d');         
      
      
@@ -388,7 +389,7 @@ $upd = false;
 $rec=SQLSelectOne("SELECT * FROM lgps_in WHERE DID='".$numer."'");
 //$rec['VALUE'] = 'ok';
 $smadr=$this->getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));
-//$smadr='улица';
+//$smadr='СѓР»РёС†Р°';
 //$smadr=$this->ga('56.836498','60.691435' );
 $rec['VALUE'] = gg($objn.'.lat').','.gg($objn.'.lng') ;
 //$rec['VALUE'] = $smadr ;
@@ -426,6 +427,7 @@ sg($objn.'.short_address', $spl[0]);
 else {sg($objn.'.gpsupdate', 'no need'); }     
     }				
 
+}
 						
 
 		}
@@ -514,7 +516,7 @@ function readHistory($id, $period, $offset)
 /*
 nm_outdata - 
 */
-addClass('livegpstracks'); // Р РЋР С•Р В·Р Т‘Р В°Р ВµР С Р С”Р В»Р В°РЎРѓРЎРѓ
+addClass('livegpstracks'); // Р В Р Р‹Р В РЎвЂўР В Р’В·Р В РўвЂР В Р’В°Р В Р’ВµР В РЎВ Р В РЎвЂќР В Р’В»Р В Р’В°Р РЋР С“Р РЋР С“
 addClassMethod('livegpstracks','update','SQLUpdate(\'objects\', array("ID"=>$this->id, "DESCRIPTION"=>$this->getProperty("title").\' \'.gg(\'sysdate\').\' \'.gg(\'timenow\'))); ');
 //addClassProperty('livegpstracks','t');
 addClassProperty('livegpstracks','d',10);
