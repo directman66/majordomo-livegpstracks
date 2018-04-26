@@ -39,7 +39,8 @@
 
 <div>
 <img src="../img/modules/livegpstracks.png"  width="48" height="48"> 
-https://livegpstracks.com/
+https://livegpstracks.com
+
  &nbsp;&nbsp;<a class="btn btn-default" href="#" onClick="$('#api_settings').toggle();return false;"><#LANG_SETUP#></a>
  &nbsp;&nbsp;<a class="btn btn-default" href="?data_source=<#DATA_SOURCE#>&view_mode=test&tab="><#LANG_TEST#></a>
 	[#if CYCLERUN==1#]
@@ -57,31 +58,7 @@ https://livegpstracks.com/
 <fieldset>
 
 
-<div class="form-group">
- <label class="control-label"[#if ERR_SERVER#] style="color:red;font-weight:bold"[#endif#]>SERVER:<span style="color:blue">(*)</span></label>
- <div class="controls"><input type="text" name="api_server" value="[#API_SERVER#]" class="input"> <#LANG_SERVER_INFO#>
-   <p class="text-muted"><br/><#LANG_SERVER_TEXT#></p>
- </div>
-</div>
 
-<div class="form-group">
- <label class="control-label"[#if ERR_PORT#] style="color:red;font-weight:bold"[#endif#]>PORT:<span style="color:blue">(*)</span></label>
- <div class="controls"><input type="text" name="api_port" value="[#API_PORT#]" class="input"> <#LANG_PORT_INFO#>
-   <p class="text-muted"><br/><#LANG_PORT_TEXT#></p>
- </div>
-</div>
-
-
-<div class="form-group">
- <label class="control-label"[#if ERR_API_MAC#] style="color:red;font-weight:bold"[#endif#]>MAC:<span style="color:blue">(*)</span></label>
- <div class="controls"><input type="text" name="api_mac" value="[#API_MAC#]" class="input"> <#LANG_MAC_INFO#>
-   <p class="text-muted"><br/><#LANG_MAC_TEXT#></p>
- </div>
-</div>
-<div class="form-group">
- <label class="control-label"><#LANG_NAME#>:</label>
- <div class="controls"><input type="text" name="srv_name" value="[#SRV_NAME#]" class="input"> <#LANG_NAME_INFO#></div>
-</div>
 <div class="form-group">
  <label class="control-label">
  <#LANG_AUTO_UPDATE_PERIOD#>:(*)
@@ -97,11 +74,7 @@ https://livegpstracks.com/
 		 </select> минут 
  </div>
 </div>
-<div class="form-group">
-  <div class="controls">
-	  <span style="color:blue">(*)</span> - <#LANG_FOR_OUTDATA#><br/>
-	</div>	
-</div>
+
 <div class="form-actions">
 <button type="submit" name="subm" value="Submit" class="btn btn-primary"><#LANG_UPDATE#></button>
 <input type="hidden" name="view_mode" value="update_settings">
@@ -112,27 +85,10 @@ https://livegpstracks.com/
 </div>
 
 <br/>
-[#if VIEW_MODE="outdata_edit"#]	
-	[#inc outdata_edit.html#]
-[#else#]
-
-
-[#if VIEW_MODE="indata_edit"#]	
-	[#inc indata_edit.html#]
-[#else#]
 <ul class="nav nav-tabs">
-  <li[#if TAB=""#] class="active"[#endif#]>
-   <a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&id=<#ID#>&tab="><#LANG_SEND#></a>
-  </li>
-  <li[#if TAB="indata"#] class="active"[#endif#]>
-   <a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&id=<#ID#>&tab=indata"><#LANG_RECEIVE#></a>
-  </li>  
+	<li [#if TAB=="" || TAB=="indata" #] class="active" [#endif#]><a href="?data_source=<#DATA_SOURCE#>&view_mode=<#VIEW_MODE#>&id=<#ID#>&tab=indata">Device</a> </li>
+	<li [#if TAB=="help" #] class="active" [#endif#]><a href="?tab=help">Help</a> </li>
 </ul>
-	[#if TAB="outdata" || TAB=""#]  
-	  [#inc outdata.html#] 	
-	[#endif sensor_add#]	
-	[#if TAB="indata"#]
-		[#inc indata.html#] 
-	[#endif#]
-[#endif#]
-[#endif#]
+
+
+[#if TAB="indata" || TAB==""#] [#inc indata.html#] [#endif#] [#if TAB="help"#] [#inc help.html#] [#endif#]
