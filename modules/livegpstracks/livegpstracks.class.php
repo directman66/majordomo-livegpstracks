@@ -161,10 +161,12 @@ function admin(&$out) {
   $out['SET_DATASOURCE']=1;
  }
  
- if ($this->tab=='' || $this->tab=='outdata') {
+ //if ($this->tab=='' || $this->tab=='outdata') {
+if ($this->tab=='outdata') {
    $this->outdata_search($out);
  }  
- if ($this->tab=='indata') {
+ //if ($this->tab=='indata') {
+if ($this->tab=='' || $this->tab=='indata') {	
    $this->indata_search($out); 
  }
  if ($this->view_mode=='test') {
