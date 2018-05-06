@@ -170,6 +170,7 @@ if ($this->tab=='' || $this->tab=='indata') {
    $this->indata_search($out); 
  }
  if ($this->view_mode=='test') {
+setGlobal('cycle_livegpstracksControl','start'); 	 
 		$this->sendData();
 		$this->readData();
 		$this->redirect("?");
