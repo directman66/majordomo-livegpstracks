@@ -93,3 +93,7 @@ https://livegpstracks.com
 
 
 [#if TAB="indata" || TAB==""#] [#inc indata.html#] [#endif#] [#if TAB="help"#] [#inc help.html#] [#endif#]
+
+				[#if VIEW_MODE="indata_edit"#]	
+	[#inc indata_edit.html#]
+[#else#][#endif#]
