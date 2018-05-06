@@ -559,6 +559,8 @@ $prop_id=addClassProperty('livegpstracks', 't', 10);
  
 EOD;
   parent::dbInstall($data);
+setGlobal('cycle_livegpstracksAutoRestart','1');	 
+	 
  }
 // --------------------------------------------------------------------
 
