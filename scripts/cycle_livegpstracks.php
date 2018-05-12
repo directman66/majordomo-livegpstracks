@@ -21,7 +21,7 @@ if ((!$tmp1['ID']) && (!$tmp2['ID']))
  
 echo date("H:i:s") . " running " . basename(__FILE__) . PHP_EOL;
 $latest_check=0;
-$checkEvery=300; // poll every 5 minutesz
+$checkEvery=60; // poll every 5 minutesz
 while (1)
 {
    setGlobal((str_replace('.php', '', basename(__FILE__))) . 'Run', time(), 1);
