@@ -338,7 +338,9 @@ $rec['VALUE'] = gg($objn.'.lat').','.gg($objn.'.lng') ;
 $rec['COORD'] = gg($objn.'.lat').','.gg($objn.'.lng') ;	
 //$rec['VALUE'] = $smadr ;
 $rec['GPSLBS'] =gg($objn.'.gpslbs'); 
-$rec['BATTERY'] =gg($objn.'.battery'); 
+if (gg($objn.'.battery')<>"" ) {$rec['BATTERY'] =gg($objn.'.battery'); }
+if (gg($objn.'.perbattery')<>"" ) {$rec['BATTERY'] =gg($objn.'.perbattery'); }	
+	
 $rec['TEMP'] =gg($objn.'.temper'); 
 $rec['DEVICE'] =gg($objn.'.device'); 
 $rec['UPDATED'] = date('Y-m-d H:i:s');
