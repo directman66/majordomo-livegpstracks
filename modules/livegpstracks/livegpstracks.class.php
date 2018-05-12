@@ -335,8 +335,12 @@ $smadr=$this->getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));
 //$smadr='РЎС“Р В»Р С‘РЎвЂ Р В°';
 //$smadr=$this->ga('56.836498','60.691435' );
 $rec['VALUE'] = gg($objn.'.lat').','.gg($objn.'.lng') ;
+$rec['COORD'] = gg($objn.'.lat').','.gg($objn.'.lng') ;	
 //$rec['VALUE'] = $smadr ;
-$rec['STREET'] =$smadr;
+$rec['GPSLBS'] =gg($objn.'.gpslbs') 
+$rec['BATTERY'] =gg($objn.'.battery') 
+$rec['TEMP'] =gg($objn.'.temper') 
+$rec['DEVICE'] =gg($objn.'.device') 
 $rec['UPDATED'] = date('Y-m-d H:i:s');
 SQLUpdate('lgps_in', $rec);
 if ($lud<> gg($objn.'.d')   and  ($lut<> gg($objn.'.t'))) {
