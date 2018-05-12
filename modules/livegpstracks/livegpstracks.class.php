@@ -304,7 +304,7 @@ $urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num,'nam
 		
 foreach ($urls as $url1) {
      
-echo $url1['url'];
+//echo $url1['url'];
 $title=$url1['name'];
 $numer=$url1['numer'];
 $content=getURL($url1['url'], 0);  
@@ -312,7 +312,7 @@ $data=json_decode($content,true);
 //$objn=$data[0]['id'];
 $objn=$data[0]['code'];
      
-echo $objn.'----------------';
+//echo $objn.'----------------';
 if ($objn<>'') {
 addClassObject('livegpstracks',$objn);
 $src=$data[0];
@@ -325,7 +325,7 @@ sg( $objn.'.link','https://livegpstracks.com/dv_'.$objn.'.html');
 sg( $objn.'.title',$title);     
 foreach ($src as $key=> $value ) {
    sg( $objn.'.'.$key,$value);
- echo $key;
+ //echo $key;
 $upd = false;
 }     
 
