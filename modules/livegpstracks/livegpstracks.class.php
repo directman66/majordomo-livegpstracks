@@ -275,7 +275,7 @@ function usual(&$out) {
    }
    
    if ($has) {     
-	$this->sendData();
+
 	$this->readData();
 		 
 	$this->config['LATEST_UPDATE']=time();
@@ -284,68 +284,8 @@ function usual(&$out) {
  }
 
  function sendData() {
-	$this->getConfig();
-
-	$table='lgps_out';
-	$properties=SQLSelect("SELECT * FROM $table WHERE active=1;");
-	$total=count($properties);
-	if ($total) {
-		$send="#".$this->config['API_MAC'];
-		if ($this->config['SRV_NAME'])
-			$send.="#".$this->config['SRV_NAME'];
-			$send.="\n";
-			for($i=0;$i<$total;$i++){
-				$val = round( getGlobal($properties[$i]['LINKED_OBJECT'].'.'.$properties[$i]['LINKED_PROPERTY']), 2);
-				
-				$send.="#".$properties[$i]['MAC']."#".$val."#".$properties[$i]['TITLE']."\n";
-				
-				$properties[$i]['UPDATED'] = date('Y-m-d H:i:s');
-				SQLUpdate($table, $properties[$i]);
-			}
-		$send.="##";
-
-		$fp = @fsockopen("tcp://narodmon.ru", 8283, $errno, $errstr);
-		if($fp) {
-			fwrite($fp, $send);
-
-			$result='';
-			while (!feof($fp)) {
-				$result.=fread($fp, 128);
-			}
-		}
-		@fclose($fp);		
-		
-		echo date("Y-m-d H:i:s")." Send ok\n";		
-	}
  }
  
- function sendVals($vals){ 
-		$this->getConfig();
- 
-	  $total=count($vals);
-		if ($total) {		
-			$send="#".$this->config['API_MAC'];
-			if ($this->config['SRV_NAME'])
-				$send.="#".$this->config['SRV_NAME'];
-			$send.="\n";
-			for($i=0;$i<$total;$i++)
-				$send.="#".$vals[$i]['MAC']."#".$vals[$i]['VALUE']."#".$vals[$i]['TITLE']."\n";
-			$send.="##";		
-		 
-			$fp = @fsockopen("tcp://narodmon.ru", 8283, $errno, $errstr);
-			if($fp) {
-			 fwrite($fp, $send);
-
-			 $result='';
-			 while (!feof($fp)) {
-				 $result.=fread($fp, 128);
-			 }
-			}
-			@fclose($fp);		
-
-			echo date("Y-m-d H:i:s")." Send vals ok\n";		
-		}	
- }
  
  function readData() {
 	$this->getConfig(); 
@@ -364,7 +304,7 @@ $urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num,'nam
 
 
 		
-	 foreach ($urls as $url1) {
+foreach ($urls as $url1) {
      
 echo $url1['url'];
 $title=$url1['name'];
@@ -379,18 +319,12 @@ if ($objn<>'') {
 addClassObject('livegpstracks',$objn);
 $src=$data[0];
      
-//Р В РЎвЂ”Р В РЎвЂўР В Р’В»Р РЋРЎвЂњР РЋРІР‚РЋР В Р’В°Р РЋР вЂ№ Р В РЎвЂ”Р В РЎвЂўР РЋР С“Р В Р’В»Р В Р’ВµР В РўвЂР В Р вЂ¦Р В Р’ВµР В Р’Вµ Р В Р’В·Р В Р вЂ¦Р В Р’В°Р РЋРІР‚РЋР В Р’ВµР В Р вЂ¦Р В РЎвЂР В Р’Вµ Р В Р вЂ Р РЋР вЂљР В Р’ВµР В РЎВР В Р’ВµР В Р вЂ¦Р В РЎвЂ Р В РЎвЂР В РЎВР В РЎвЂ”Р В РЎвЂўР РЋР вЂљР РЋРІР‚С™Р В РЎвЂР РЋР вЂљР В РЎвЂўР В Р вЂ Р В Р’В°Р В Р вЂ¦Р В РЎвЂР РЋР РЏ Р В Р вЂ  Р В Р’В±Р В РўвЂ     
 $lud=gg($objn.'.d'); $lut=gg($objn.'.d');         
      
      
-     sg( $objn.'.json',$content);
-   
-   sg( $objn.'.link','https://livegpstracks.com/dv_'.$objn.'.html'); 
-    
-  sg( $objn.'.title',$title);     
-
-
-
+sg( $objn.'.json',$content);
+sg( $objn.'.link','https://livegpstracks.com/dv_'.$objn.'.html'); 
+sg( $objn.'.title',$title);     
 foreach ($src as $key=> $value ) {
    sg( $objn.'.'.$key,$value);
  echo $key;
@@ -400,18 +334,15 @@ $upd = false;
 $rec=SQLSelectOne("SELECT * FROM lgps_in WHERE DID='".$numer."'");
 //$rec['VALUE'] = 'ok';
 $smadr=$this->getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));
-//$smadr='СѓР»РёС†Р°';
+//$smadr='РЎС“Р В»Р С‘РЎвЂ Р В°';
 //$smadr=$this->ga('56.836498','60.691435' );
 $rec['VALUE'] = gg($objn.'.lat').','.gg($objn.'.lng') ;
 //$rec['VALUE'] = $smadr ;
 $rec['STREET'] =$smadr;
 $rec['UPDATED'] = date('Y-m-d H:i:s');
-
 SQLUpdate('lgps_in', $rec);
-
-
 if ($lud<> gg($objn.'.d')   and  ($lut<> gg($objn.'.t'))) {
-     
+    
 $url = BASE_URL . '/gps.php?latitude=' . gg($objn.'.lat')
         . '&longitude=' . gg($objn.'.lng')
         . '&altitude=' . gg($objn.'.altitude')
@@ -421,22 +352,16 @@ $url = BASE_URL . '/gps.php?latitude=' . gg($objn.'.lat')
         . '&battlevel=' . gg($objn.'.battery') 
         . '&charging=' . gg($objn.'.charging') 
         . '&deviceid=' . $objn ;
-
 getURL($url, 0);
- 
 $adr=getadrfromxy(gg($objn.'.lat'),gg($objn.'.lng'));  
 sg($objn.'.address', $adr); 
- 
 //$spl=split(',',$adr) ;
 $spl=explode(',',$adr) ;
 sg($objn.'.short_address', $spl[0]); 
-
- sg($objn.'.gpsupdate', 'updated'); 
-
-
+sg($objn.'.gpsupdate', 'updated'); 
 }    
 else {sg($objn.'.gpsupdate', 'no need'); }     
-    }				
+}				
 
 }
 						
@@ -527,7 +452,7 @@ function readHistory($id, $period, $offset)
 /*
 nm_outdata - 
 */
-addClass('livegpstracks'); // Р В Р Р‹Р В РЎвЂўР В Р’В·Р В РўвЂР В Р’В°Р В Р’ВµР В РЎВ Р В РЎвЂќР В Р’В»Р В Р’В°Р РЋР С“Р РЋР С“
+addClass('livegpstracks'); // Р В Р’В Р В Р вЂ№Р В Р’В Р РЋРІР‚СћР В Р’В Р вЂ™Р’В·Р В Р’В Р СћРІР‚ВР В Р’В Р вЂ™Р’В°Р В Р’В Р вЂ™Р’ВµР В Р’В Р РЋР’В Р В Р’В Р РЋРІР‚СњР В Р’В Р вЂ™Р’В»Р В Р’В Р вЂ™Р’В°Р В Р Р‹Р В РЎвЂњР В Р Р‹Р В РЎвЂњ
 addClassMethod('livegpstracks','update','SQLUpdate(\'objects\', array("ID"=>$this->id, "DESCRIPTION"=>$this->getProperty("title").\' \'.gg(\'sysdate\').\' \'.gg(\'timenow\'))); ');
 //addClassProperty('livegpstracks','t');
 addClassProperty('livegpstracks','d',10);
