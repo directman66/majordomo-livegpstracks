@@ -27,9 +27,8 @@
 <tr>
 <th>Id</th>
 <th><#LANG_TITLE#></th>
-<th><#LANG_VALUE#></th>  
-<th>Адрес</th>  
 <th>Координаты</th>  
+<th>Адрес</th>  
 <th>Аккумулятор</th>   
 <th>Температура</th>    
 <th>device</th>   
@@ -58,6 +57,39 @@
    &nbsp;
   [#endif#]
  </td>  
+ 
+  <td style="vertical-align:middle">
+  [#if BATTERY!=""#]
+   [#BATTERY#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>  
+
+  <td style="vertical-align:middle">
+  [#if TEMP!=""#]
+   [#TEMP#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>  
+ 
+  <td style="vertical-align:middle">
+  [#if DEVICE!=""#]
+   [#DEVICE#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>  
+ 
+  <td style="vertical-align:middle">
+  [#if GPSLBS!=""#]
+   [#GPSLBS#]
+  [#else#]
+   &nbsp;
+  [#endif#]
+ </td>  
+ 
  <td style="vertical-align:middle">
   [#if STREET!=""#]
    [#STREET#]
