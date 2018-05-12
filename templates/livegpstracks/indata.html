@@ -91,11 +91,16 @@
  </td>  
  
   <td style="vertical-align:middle">
-  [#if GPSLBS!=""#]
-   [#GPSLBS#]
-  [#else#]
-   &nbsp;
+   
+
+   
+   
+[#if GPSLBS!="A"#]
+   <img src="../img/modules/LBS.png" TITLE="[#GPSLBS#]">
   [#endif#]
+[#if GPSLBS!="V"#]
+   <img src="../img/modules/GPS.png" TITLE="[#GPSLBS#]">
+  [#endif#]   
  </td>  
  
  <td style="vertical-align:middle">
