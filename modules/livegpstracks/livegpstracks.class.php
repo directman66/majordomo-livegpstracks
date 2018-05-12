@@ -20,7 +20,6 @@ function livegpstracks() {
   $this->title="livegpstracks.com";
   $this->module_category="<#LANG_SECTION_APPLICATIONS#>";
   $this->checkInstalled();
-  $this->API_KEY = "35uRe2lIkUUPY"; // Module Key
 }
 /**
 * saveParams
@@ -171,9 +170,8 @@ if ($this->tab=='' || $this->tab=='indata') {
  }
  if ($this->view_mode=='test') {
 setGlobal('cycle_livegpstracksControl','start'); 	 
-		$this->sendData();
 		$this->readData();
-		$this->redirect("?");
+
  }
  if ($this->view_mode=='outdata_edit') {
    $this->outdata_edit($out, $this->id);
@@ -270,9 +268,9 @@ function usual(&$out) {
    $every=$this->config['EVERY'];
    $tdev = time()-$this->config['LATEST_UPDATE'];
    $has = $tdev>$every*60;
-   if ($tdev < 0) {
+//   if ($tdev < 0) {
 		$has = true;
-   }
+//   }
    
    if ($has) {     
 
