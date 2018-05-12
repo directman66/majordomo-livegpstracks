@@ -480,7 +480,11 @@ $prop_id=addClassProperty('livegpstracks', 't', 10);
  lgps_in: UPDATED datetime
  lgps_in: LINKED_OBJECT varchar(100) NOT NULL DEFAULT ''
  lgps_in: LINKED_PROPERTY varchar(100) NOT NULL DEFAULT ''
- 
+ lgps_in: COORD varchar(50) 
+ lgps_in: BATTERY varchar(30)  
+ lgps_in: TEMP varchar(30)   
+ lgps_in: DEVICE varchar(100)    
+ lgps_in: GPSLBS varchar(100)     
 EOD;
   parent::dbInstall($data);
 setGlobal('cycle_livegpstracksAutoRestart','1');	 
