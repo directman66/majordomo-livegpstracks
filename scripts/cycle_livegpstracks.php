@@ -13,11 +13,11 @@ include_once(DIR_MODULES . 'livegpstracks/livegpstracks.class.php');
 $livegpstracks_module = new livegpstracks();
 $livegpstracks_module->getConfig();
 // In data
-$tmp1 = SQLSelectOne("SELECT ID FROM lgps_out LIMIT 1");
+//$tmp1 = SQLSelectOne("SELECT ID FROM lgps_out LIMIT 1");
 // Out data
-$tmp2 = SQLSelectOne("SELECT ID FROM lgps_in LIMIT 1");
-if ((!$tmp1['ID']) && (!$tmp2['ID']))
-   exit; // no devices added -- no need to run this cycle
+//$tmp2 = SQLSelectOne("SELECT ID FROM lgps_in LIMIT 1");
+//if ((!$tmp1['ID']) && (!$tmp2['ID']))
+//   exit; // no devices added -- no need to run this cycle
  
 echo date("H:i:s") . " running " . basename(__FILE__) . PHP_EOL;
 $latest_check=0;
