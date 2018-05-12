@@ -345,7 +345,7 @@ $rec['TEMP'] =gg($objn.'.temper');
 $rec['DEVICE'] =gg($objn.'.device'); 
 $rec['UPDATED'] = date('Y-m-d H:i:s');
 SQLUpdate('lgps_in', $rec);
-if ($lud<> gg($objn.'.d')   and  ($lut<> gg($objn.'.t'))) {
+//if ($lud<> gg($objn.'.d')   and  ($lut<> gg($objn.'.t'))) {
     
 $url = BASE_URL . '/gps.php?latitude=' . gg($objn.'.lat')
         . '&longitude=' . gg($objn.'.lng')
@@ -363,65 +363,17 @@ sg($objn.'.address', $adr);
 $spl=explode(',',$adr) ;
 sg($objn.'.short_address', $spl[0]); 
 sg($objn.'.gpsupdate', 'updated'); 
-}    
-else {sg($objn.'.gpsupdate', 'no need'); }     
+//}    
+//else {sg($objn.'.gpsupdate', 'no need'); }     
 }				
 
 }
 						
 
 		}
-function ga($x,$y)
-{return "ok";}
 	
  
    
-function readHistory($id, $period, $offset)
-{
-	$this->getConfig(); 
-
-	$request =
-		array( 
-			'cmd' => "sensorLog", 
-			'id' => $id,
-			'period' => $period,
-			'offset' => $offset,
-			'uuid' => $this->config['UUID'],
-			'api_key' => $this->API_KEY
-		);
-
-	if($ch = curl_init('http://narodmon.ru/api')) {
-		curl_setopt($ch, CURLOPT_POST, true);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'MajorDomo module');
-		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($request));
-		$reply = curl_exec($ch); 
-
-		if(!$reply or empty($reply)) 
-		{
-			echo date("Y-m-d H:i:s")."Request: Connect error : ".$reply."\n";
-			return false;
-		}
-
-		$data = json_decode($reply, true);
-		if(!$data or !is_array($data))
-		{
-			echo date("Y-m-d H:i:s")."Request: Wrong data\n";
-			return false;
-		}
-
-		echo date("Y-m-d H:i:s")." Request: ok\n";
-			
-		curl_close($ch); 
-
-		print_r($data);
-
-		return ($data);
-	}	
-
-	return false;
-}
  
 /**
 * Install
