@@ -293,8 +293,8 @@ function usual(&$out) {
 
 foreach ($properties as $did)
 {
-$num=$did[DID];
-$title=$did[TITLE];
+$num=$did['DID'];
+$title=$did['TITLE'];
 //$urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num];
 $urls[] = ['url' => 'http://livegpstracks.com/viewer_coos_s.php?code='.$num,'name'=>$title,'numer'=>$num];
 }	
