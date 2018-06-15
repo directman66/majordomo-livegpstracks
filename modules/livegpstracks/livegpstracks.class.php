@@ -357,7 +357,7 @@ $url = BASE_URL . '/gps.php?latitude=' . gg($objn.'.lat')
         . '&charging=' . gg($objn.'.charging') 
         . '&deviceid=' . $objn ;
 getURL($url, 0);
-$adr=getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));  
+//$adr=getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));  
 sg($objn.'.address', $adr); 
 //$spl=split(',',$adr) ;
 $spl=explode(',',$adr) ;
