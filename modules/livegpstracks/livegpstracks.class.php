@@ -289,16 +289,8 @@ $port=3359;
 $socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname("tcp"));  // Create Socket
         if (socket_connect($socket, $host, $port)) 
         {  //Connect
-//circle 1
-       // $sendStr = 'ff 08 00 ff ff ff ff ff ff 4f 2d';  // 16 hexadecimal data
-       //  $sendStr = '41 03 51 51 30 54 46 76 56 41 14 98 26 00 97 53 18 80 65';
-//410351513054467656 4114 9826009753188065         
-//              0351513054467656         
-//$sendStr = '410351513054467656 4114 9826009753188065';
-//$sendStr = 'AQQ0TFvVA&';
-//$sendStr = 'ARR0TFvVA&';
          
-         
+        
 $imei='351513054467656';
 $x='-59.4364251';
 $y='-129.9839853';
@@ -319,23 +311,8 @@ $sendStr= "rtt003,$imei,$x,$y,$speed,$visota,$azimut,$bat,$dt,$tm,$utc,$sputnik,
 echo    $sendStr;      
          
 socket_write ($socket,$sendStr );   // by group data transmission
-//$sendStrArray = str_split(str_replace(' ', '', $sendStr), 2);  // The 16 binary data into a set of two arrays
-//for ($j = 0; $j <count ($sendStrArray); $j++) {
-//socket_write ($socket, Chr (hexdec ($sendStrArray[$j])));   // by group data transmission
-//            }
-         
-//$receiveStr = "";
-//$receiveStr = socket_read($socket, 1024, PHP_BINARY_READ);  // The 2 band data received 
-//$receiveStrHex = bin2hex ($receiveStr);   // the 2 hexadecimal data convert 16 hex
-//echo  "send:".$sendStr ;
-//         echo "<br>";
-//         echo " answer:" . $receiveStr;   
-//         echo " answerSTR:" .hex2str($receiveStrHex);
-//         echo " answerHEX:" . $receiveStrHex.'<br>';
-//   
 }
         socket_close($socket);  // Close Socket
-
 
 /////////////////////////////////
 /////////////////////////////////
@@ -370,6 +347,7 @@ socket_write ($socket,$sendStr );   // by group data transmission
 //уровень GSM сигнала: "60", (int) 2 символа
 //признак GPS или LBS: "A" (координаты определены по GPS или "V" - по LBS), (string) 1 символ
 //SOS: "1" (сработала кнопка SOS) или "0" (не нажата), (int) 1 символ
+*/
 	 
  }
  
@@ -460,7 +438,7 @@ sg($objn.'.gpsupdate', 'updated');
 
 }
 
-*/
+
 						
 
 		}
