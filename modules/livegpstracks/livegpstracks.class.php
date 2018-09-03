@@ -6,6 +6,7 @@
 * @copyright http://majordomo.smartliving.ru/ (c)
 * @version 0.1 (wizard, 09:04:00 [Apr 04, 2016])
 */
+
 //
 //
 class livegpstracks extends module {
@@ -45,6 +46,8 @@ function saveParams($data=0) {
  return parent::saveParams($p);
 }
 
+	
+	
 
 
 /**
