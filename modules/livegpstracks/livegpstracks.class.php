@@ -282,6 +282,95 @@ function usual(&$out) {
  }
 
  function sendData() {
+	 
+	 //rtt protocol
+$host="5.9.136.109";
+$port=3359;
+$socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname("tcp"));  // Create Socket
+        if (socket_connect($socket, $host, $port)) 
+        {  //Connect
+//circle 1
+       // $sendStr = 'ff 08 00 ff ff ff ff ff ff 4f 2d';  // 16 hexadecimal data
+       //  $sendStr = '41 03 51 51 30 54 46 76 56 41 14 98 26 00 97 53 18 80 65';
+//410351513054467656 4114 9826009753188065         
+//              0351513054467656         
+//$sendStr = '410351513054467656 4114 9826009753188065';
+//$sendStr = 'AQQ0TFvVA&';
+//$sendStr = 'ARR0TFvVA&';
+         
+         
+$imei='351513054467656';
+$x='-59.4364251';
+$y='-129.9839853';
+$speed=0023;
+$visota=0014;      
+$azimut=123;
+$bat="090";
+$dt=20130618;
+$tm=195430;
+$utc='-11';
+$sputnik=24;
+$gsm=60;         
+$gpslbs='A';
+$sos=0;         
+         
+         
+$sendStr= "rtt003,$imei,$x,$y,$speed,$visota,$azimut,$bat,$dt,$tm,$utc,$sputnik,$gsm,$gpslbs,".$sos;         
+echo    $sendStr;      
+         
+socket_write ($socket,$sendStr );   // by group data transmission
+//$sendStrArray = str_split(str_replace(' ', '', $sendStr), 2);  // The 16 binary data into a set of two arrays
+//for ($j = 0; $j <count ($sendStrArray); $j++) {
+//socket_write ($socket, Chr (hexdec ($sendStrArray[$j])));   // by group data transmission
+//            }
+         
+//$receiveStr = "";
+//$receiveStr = socket_read($socket, 1024, PHP_BINARY_READ);  // The 2 band data received 
+//$receiveStrHex = bin2hex ($receiveStr);   // the 2 hexadecimal data convert 16 hex
+//echo  "send:".$sendStr ;
+//         echo "<br>";
+//         echo " answer:" . $receiveStr;   
+//         echo " answerSTR:" .hex2str($receiveStrHex);
+//         echo " answerHEX:" . $receiveStrHex.'<br>';
+//   
+}
+        socket_close($socket);  // Close Socket
+
+
+/////////////////////////////////
+/////////////////////////////////
+//http://livegpstracks.com/forum/viewtopic.php?f=30&t=949
+//Облегченный открытый RTT-протокол версии 003
+
+//Сервер: srv1.livegpstracks.com или 5.9.136.109
+//Порт: 3359
+//Устройство для выбора из списка при подключении: RTT Lite
+
+//Данный протокол реализует однонаправленную передачу данных между терминалом и сервером.
+//Информация передаётся по сети интернет с использованием протокола TCP/IP.
+
+//От устройства приходит строка с данными. Пример:
+//Код:
+//rtt003,356217625371625,-59.4364251,-129.9839853,0023,0014,123,090,20130618,195430,-11,24,60,A,1
+//В ответ сервер выдаст "\r\n". Под "\r\n" понимается последовательность 0x0D, 0x0A.
+
+//Расшифровка пакета:
+//Протокол: "rtt003", (string) 6 символов
+//imei: "356217625371625", (string) 15 символов
+//долгота: "-59.4364251", (float) 11 символов
+//широта: "-129.9839853", (float) 12 символов
+//скорость: "23", (int) 2 символа
+//высота: "14", (int) 2 символа
+//азимут: "123", (int) 3 символа
+//заряд батареи: "90", в процентах, (int) 3 символа
+//дата: "20130618", (string) 8 символов
+//время: "195430", (string) 6 символов
+//UTC: "-11", (int) 3 символа
+//количество спутников: "24", (int) 2 символа
+//уровень GSM сигнала: "60", (int) 2 символа
+//признак GPS или LBS: "A" (координаты определены по GPS или "V" - по LBS), (string) 1 символ
+//SOS: "1" (сработала кнопка SOS) или "0" (не нажата), (int) 1 символ
+	 
  }
  
  
@@ -357,7 +446,7 @@ $url = BASE_URL . '/gps.php?latitude=' . gg($objn.'.lat')
         . '&charging=' . gg($objn.'.charging') 
         . '&deviceid=' . $objn ;
 getURL($url, 0);
-$adr=getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));  
+//$adr=getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));  
 sg($objn.'.address', $adr); 
 //$spl=split(',',$adr) ;
 $spl=explode(',',$adr) ;
