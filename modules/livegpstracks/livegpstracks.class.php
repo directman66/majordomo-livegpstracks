@@ -6,7 +6,6 @@
 * @copyright http://majordomo.smartliving.ru/ (c)
 * @version 0.1 (wizard, 09:04:00 [Apr 04, 2016])
 */
-
 //
 //
 class livegpstracks extends module {
@@ -46,8 +45,6 @@ function saveParams($data=0) {
  return parent::saveParams($p);
 }
 
-	
-	
 
 
 /**
@@ -360,7 +357,7 @@ $url = BASE_URL . '/gps.php?latitude=' . gg($objn.'.lat')
         . '&charging=' . gg($objn.'.charging') 
         . '&deviceid=' . $objn ;
 getURL($url, 0);
-//$adr=getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));  
+$adr=getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));  
 sg($objn.'.address', $adr); 
 //$spl=split(',',$adr) ;
 $spl=explode(',',$adr) ;
