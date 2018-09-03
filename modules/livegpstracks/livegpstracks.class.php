@@ -282,8 +282,6 @@ function usual(&$out) {
  }
 
  function sendData() {
-
-	 
  }
  
  
@@ -334,7 +332,7 @@ $upd = false;
 $rec=SQLSelectOne("SELECT * FROM lgps_in WHERE DID='".$numer."'");
 //$rec['VALUE'] = 'ok';
 $smadr=$this->getaddrfromcoord(gg($objn.'.lat'),gg($objn.'.lng'));
-//$smadr='РЎС“Р В»Р С‘РЎвЂ Р В°';
+//$smadr='РЎС“Р В»Р С‘РЎвЂ Р В°';
 //$smadr=$this->ga('56.836498','60.691435' );
 $rec['VALUE'] = gg($objn.'.lat').','.gg($objn.'.lng') ;
 $rec['COORD'] = gg($objn.'.lat').','.gg($objn.'.lng') ;	
@@ -369,11 +367,7 @@ sg($objn.'.gpsupdate', 'updated');
 //else {sg($objn.'.gpsupdate', 'no need'); }     
 }				
 
-
-
 }
-
-
 						
 
 		}
@@ -414,7 +408,7 @@ sg($objn.'.gpsupdate', 'updated');
 /*
 nm_outdata - 
 */
-addClass('livegpstracks'); // Р В Р’В Р В Р вЂ№Р В Р’В Р РЋРІР‚СћР В Р’В Р вЂ™Р’В·Р В Р’В Р СћРІР‚ВР В Р’В Р вЂ™Р’В°Р В Р’В Р вЂ™Р’ВµР В Р’В Р РЋР’В Р В Р’В Р РЋРІР‚СњР В Р’В Р вЂ™Р’В»Р В Р’В Р вЂ™Р’В°Р В Р Р‹Р В РЎвЂњР В Р Р‹Р В РЎвЂњ
+addClass('livegpstracks'); // Р В Р’В Р В Р вЂ№Р В Р’В Р РЋРІР‚СћР В Р’В Р вЂ™Р’В·Р В Р’В Р СћРІР‚ВР В Р’В Р вЂ™Р’В°Р В Р’В Р вЂ™Р’ВµР В Р’В Р РЋР’В Р В Р’В Р РЋРІР‚СњР В Р’В Р вЂ™Р’В»Р В Р’В Р вЂ™Р’В°Р В Р Р‹Р В РЎвЂњР В Р Р‹Р В РЎвЂњ
 addClassMethod('livegpstracks','update','SQLUpdate(\'objects\', array("ID"=>$this->id, "DESCRIPTION"=>$this->getProperty("title").\' \'.gg(\'sysdate\').\' \'.gg(\'timenow\'))); ');
 //addClassProperty('livegpstracks','t');
 addClassProperty('livegpstracks','d',10);
