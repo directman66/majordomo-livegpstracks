@@ -282,7 +282,7 @@ function usual(&$out) {
  }
 
  function sendData() {
-	 
+/*	 
 	 //rtt protocol
 $host="5.9.136.109";
 $port=3359;
@@ -456,7 +456,11 @@ sg($objn.'.gpsupdate', 'updated');
 //else {sg($objn.'.gpsupdate', 'no need'); }     
 }				
 
+
+
 }
+
+*/
 						
 
 		}
