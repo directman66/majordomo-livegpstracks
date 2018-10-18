@@ -21,7 +21,8 @@ $livegpstracks_module->getConfig();
  
 echo date("H:i:s") . " running " . basename(__FILE__) . PHP_EOL;
 $latest_check=0;
-$checkEvery=60; // poll every 5 minutesz
+//$checkEvery=60; // poll every 5 minutesz
+$checkEvery=$livegpstracks_module->config['EVERY'];
 while (1)
 {
    setGlobal((str_replace('.php', '', basename(__FILE__))) . 'Run', time(), 1);
